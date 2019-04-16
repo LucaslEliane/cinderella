@@ -29,6 +29,8 @@ dependencies:
   path_provider: any
   # flutter routing library
   fluro: ^1.4.0
+  # shared_preferences store
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:

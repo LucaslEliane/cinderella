@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseProvider {
   DatabaseProvider._();
 
-  static final DatabaseProvider provider = DatabaseProvider._();
+  static final DatabaseProvider db = DatabaseProvider._();
 
   static Database _database;
 
