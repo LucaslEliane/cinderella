@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/views/welcome/welcome_page.dart';
 
 class Welcome extends StatefulWidget {
     @override
@@ -10,11 +11,11 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
     @override
     Widget build(BuildContext context) {
-        return new Scaffold(
-            appBar: new AppBar(
-                title: const Text('Welcome Cinderella')
+        return SafeArea(
+            child: new Container(
+                color: Colors.white,
+                child: WelcomePage()
             ),
-            body: const Text('It is body')
         );
     }
 }
