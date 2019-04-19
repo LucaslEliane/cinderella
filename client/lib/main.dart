@@ -16,13 +16,14 @@ void main() async {
 class Cinderella extends StatelessWidget {
   Cinderella() {
     final router = new Router();
-
+    // 初始化项目，进行路由初始化配置
     Routes.configureRoutes(router);
     Application.router = router;
   }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // 设置应用主题色
     MaterialColor themeLightPink = MaterialColor(0xFFF0EBE5, MorandiColor.lightPink);
 
     return MaterialApp(

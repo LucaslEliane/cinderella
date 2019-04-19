@@ -26,13 +26,17 @@ class DatabaseProvider {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     String path = join(documentsDirectory.path, "Cinderella.db");
-    return await openDatabase(path, version: 1, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE User ("
-          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-          "user_name TEXT,"
-          "blocked BIT"
-          ")");
-    });
+    return await openDatabase(
+      path,
+      version: 1,
+      onOpen: (db) {},
+      onCreate: (Database db, int version) async {
+        await db.execute("CREATE TABLE User ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            "user_name TEXT,"
+            "blocked BIT"
+            ")");
+      }
+    );
   }
 }
