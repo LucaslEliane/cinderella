@@ -12,7 +12,13 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: new Container(color: Colors.white, child: WelcomePage()),
+      right: false,
+      bottom: false,
+      left: false,
+      child: new Container(
+        color: Colors.white,
+        child: WelcomePage()
+      ),
     );
   }
 }

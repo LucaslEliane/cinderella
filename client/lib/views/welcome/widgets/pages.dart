@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:client/view_models/welcome.dart';
+import 'package:client/views/welcome/widgets/pager_indicator.dart';
 
 final pages = [
-  PageViewModel(const Color(0xFFcd344f), 'assets/images/welcome/page1.png')
+  PageViewModel(const Color(0xFFcd344f), 'assets/images/welcome/page1.png'),
+  PageViewModel(const Color(0xFFce423a), 'assets/images/welcome/page2.png')
 ];
 
-class Pages extends StatelessWidget {
+class Pages extends StatefulWidget {
+  @override
+  PagesState createState() => new PagesState();
+}
+class PagesState extends State<Pages> {
   final PageViewModel viewModel;
+  int activeIndex = 0;
+  SlideDirection slideDirection = SlideDirection.none;
+  double slidePercent = 0.0;
 
-  Pages({this.viewModel});
+  PagesState({this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +30,9 @@ class Pages extends StatelessWidget {
               opacity: 1.0,
               child: ListView(
                 children: <Widget>[layout(context)],
-              )))
+              ))
+      ),
+      new PagerIndicator(viewModel: new PagerIndicatorViewModel(pages, 0, SlideDirection.none, 10))
     ]);
   }
 
@@ -37,15 +49,8 @@ class Pages extends StatelessWidget {
             child: Image.asset(viewModel.heroAssetPath,
                 width: 160.0, height: 160.0),
           ),
-        )
+        ),
       ],
     );
   }
-}
-
-class PageViewModel {
-  final Color color;
-  final String heroAssetPath;
-
-  PageViewModel(this.color, this.heroAssetPath);
 }
