@@ -12,7 +12,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return new Stack(
-      children: <Widget>[new Pages(viewModel: pages[0])],
+      children: <Widget>[new Pages()],
     );
   }
 }

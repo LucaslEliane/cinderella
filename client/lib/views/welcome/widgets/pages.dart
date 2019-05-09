@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:client/view_models/welcome.dart';
 import 'package:client/views/welcome/widgets/pager_indicator.dart';
+import 'package:client/views/welcome/widgets/pager_slider.dart';
 
 final pages = [
   PageViewModel(const Color(0xFFcd344f), 'assets/images/welcome/page1.png'),
@@ -12,12 +14,28 @@ class Pages extends StatefulWidget {
   PagesState createState() => new PagesState();
 }
 class PagesState extends State<Pages> {
-  final PageViewModel viewModel;
+  StreamController sliderUpdater;
   int activeIndex = 0;
   SlideDirection slideDirection = SlideDirection.none;
   double slidePercent = 0.0;
 
-  PagesState({this.viewModel});
+  final PageViewModel viewModel = pages[0];
+
+  PagesState() {
+    sliderUpdater = new StreamController<SliderState>();
+
+    sliderUpdater.stream.listen(onDrag);
+  }
+
+  void onDrag(SliderState event) {
+    if (mounted) {
+      setState(() {
+        if (event.sliderEventType == SliderEventType.dragging) {
+          
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
