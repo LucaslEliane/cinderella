@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:client/view_models/welcome.dart';
 import 'package:client/views/welcome/widgets/pager_indicator.dart';
 import 'package:client/views/welcome/widgets/pager_slider.dart';
+import 'package:client/views/welcome/widgets/pager_dragger.dart';
 
 final pages = [
   PageViewModel(const Color(0xFFcd344f), 'assets/images/welcome/page1.png'),
@@ -27,12 +28,12 @@ class PagesState extends State<Pages> {
     sliderUpdater.stream.listen(onDrag);
   }
 
-  void onDrag(SliderState event) {
+  void onDrag(dynamic event) {
+    SliderState state = event;
     if (mounted) {
+      print(state);
       setState(() {
-        if (event.sliderEventType == SliderEventType.dragging) {
-          
-        }
+        slidePercent += 0.1;
       });
     }
   }
@@ -41,16 +42,18 @@ class PagesState extends State<Pages> {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
-          width: double.infinity,
-          color: viewModel.color,
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: Opacity(
-              opacity: 1.0,
-              child: ListView(
-                children: <Widget>[layout(context)],
-              ))
+        width: double.infinity,
+        color: viewModel.color,
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        child: Opacity(
+          opacity: 1.0,
+          child: ListView(
+            children: <Widget>[layout(context)],
+          )
+        )
       ),
-      new PagerIndicator(viewModel: new PagerIndicatorViewModel(pages, 0, SlideDirection.none, 10))
+      new PagerIndicator(viewModel: new PagerIndicatorViewModel(pages, 0, SlideDirection.none, 10)),
+      new PagerDragger(sliderUpdater)
     ]);
   }
 
@@ -61,7 +64,7 @@ class PagesState extends State<Pages> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Transform(
-          transform: Matrix4.translationValues(0.0, 0.0, 0.0),
+          transform: Matrix4.translationValues(0.0, 10 * slidePercent, 0.0),
           child: Padding(
             padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
             child: Image.asset(viewModel.heroAssetPath,

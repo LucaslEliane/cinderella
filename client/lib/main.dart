@@ -3,13 +3,17 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'constants/color.dart';
 import 'utils/provider.dart';
+import 'utils/screen_factor.dart';
 import 'routers/application.dart';
 
 var database;
+var screen;
 
 void main() async {
     // 初始化 database，其实单例模式也没必要初始化全局DB
     database = DatabaseProvider.db;
+    screen = ScreenFactor.screen;
+    
     runApp(new Cinderella());
 }
 
