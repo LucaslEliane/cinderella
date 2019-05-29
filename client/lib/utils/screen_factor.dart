@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class ScreenFactor {
-  ScreenFactor._();
+  factory ScreenFactor() => _sharedInstance();
 
-  static ScreenFactor _screenFactor;
-  
-  static ScreenFactor getInstance() {
-    if (_screenFactor == null) {
-      _screenFactor= ScreenFactor._();
-    }
-    return _screenFactor;
+  static ScreenFactor _instance = ScreenFactor._();
+
+  Size _physicalSize;
+  double _devicePixelRatio;
+
+  ScreenFactor._() {
+    _physicalSize = window.physicalSize;
+    _devicePixelRatio = window.devicePixelRatio;
   }
 
+  static ScreenFactor _sharedInstance() {
+    return _instance;
+  }
+
+  Size get physicalSize {
+    return _physicalSize;
+  }
+
+  double get devicePixelRatio {
+    return _devicePixelRatio;
+  }
   
 }

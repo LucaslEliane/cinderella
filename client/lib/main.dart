@@ -7,12 +7,12 @@ import 'utils/screen_factor.dart';
 import 'routers/application.dart';
 
 var database;
-var screen;
+ScreenFactor screen;
 
 void main() async {
     // 初始化 database，其实单例模式也没必要初始化全局DB
     database = DatabaseProvider.db;
-    screen = ScreenFactor.screen;
+    screen = ScreenFactor();
     
     runApp(new Cinderella());
 }
