@@ -30,6 +30,8 @@ class Cinderella extends StatelessWidget {
     // 设置应用主题色
     MaterialColor themeLightPink = MaterialColor(0xFFF0EBE5, MorandiColor.lightPink);
 
+    // screen.initMediaQueryData(context);
+
     return MaterialApp(
       title: 'Cinderella',
       theme: ThemeData(

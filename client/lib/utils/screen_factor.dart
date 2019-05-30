@@ -6,12 +6,20 @@ class ScreenFactor {
 
   static ScreenFactor _instance = ScreenFactor._();
 
+  MediaQueryData _screenMediaQueryData;
+
   Size _physicalSize;
   double _devicePixelRatio;
 
   ScreenFactor._() {
     _physicalSize = window.physicalSize;
     _devicePixelRatio = window.devicePixelRatio;
+  }
+
+  void initMediaQueryData(BuildContext context) {
+    if(_screenMediaQueryData != null) {
+      _screenMediaQueryData = MediaQuery.of(context);
+    }
   }
 
   static ScreenFactor _sharedInstance() {
@@ -24,6 +32,10 @@ class ScreenFactor {
 
   double get devicePixelRatio {
     return _devicePixelRatio;
+  }
+
+  EdgeInsets get devicePadding {
+    return _screenMediaQueryData.padding;
   }
   
 }
