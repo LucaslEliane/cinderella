@@ -17,10 +17,12 @@ class ScreenFactor {
   }
 
   void initMediaQueryData(BuildContext context) {
-    if(_screenMediaQueryData != null) {
+    if (_screenMediaQueryData == null) {
       _screenMediaQueryData = MediaQuery.of(context);
     }
   }
+
+  static ScreenFactor get instance => _sharedInstance();
 
   static ScreenFactor _sharedInstance() {
     return _instance;

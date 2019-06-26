@@ -6,14 +6,9 @@ import 'utils/provider.dart';
 import 'utils/screen_factor.dart';
 import 'routers/application.dart';
 
-var database;
-ScreenFactor screen;
 
 void main() async {
     // 初始化 database，其实单例模式也没必要初始化全局DB
-    database = DatabaseProvider.db;
-    screen = ScreenFactor();
-    
     runApp(new Cinderella());
 }
 
@@ -30,7 +25,7 @@ class Cinderella extends StatelessWidget {
     // 设置应用主题色
     MaterialColor themeLightPink = MaterialColor(0xFFF0EBE5, MorandiColor.lightPink);
 
-    // screen.initMediaQueryData(context);
+    ScreenFactor sf = new ScreenFactor();
 
     return MaterialApp(
       title: 'Cinderella',
