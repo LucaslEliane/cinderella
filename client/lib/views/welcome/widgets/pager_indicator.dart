@@ -1,6 +1,8 @@
 import 'package:client/view_models/welcome.dart';
 import 'package:flutter/material.dart';
 
+import 'package:client/utils/screen_factor.dart';
+
 class PagerIndicator extends StatelessWidget {
   final PagerIndicatorViewModel viewModel;
 
@@ -11,6 +13,7 @@ class PagerIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<PagerIndicatorBubble> bubbles = [];
+    final EdgeInsets devicePadding = ScreenFactor.instance.devicePadding;
 
     for (var i = 0; i < viewModel.pages.length; i++) {
       final page = viewModel.pages[i];
@@ -20,8 +23,13 @@ class PagerIndicator extends StatelessWidget {
       ));
     }
 
-    return new Row(
-      children: bubbles
+    return new Container(
+      padding: devicePadding,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: bubbles
+      )
     );
   }
 }
@@ -47,13 +55,13 @@ class PagerIndicatorBubble extends StatelessWidget {
               child: new Container(
                 color: Colors.white
               ),
-              flex: viewModel.activePercent
+              flex: this.doublePercentToInt(viewModel.activePercent)
             ),
             new Expanded(
               child: new Container(
                 color: Colors.black
               ),
-              flex: 100 - viewModel.activePercent
+              flex: 100 - this.doublePercentToInt(viewModel.activePercent)
             )
           ],
         )
@@ -61,6 +69,9 @@ class PagerIndicatorBubble extends StatelessWidget {
     );
   }
 
-
+  int doublePercentToInt(double percent) {
+    print(percent);
+    return (percent * 100).round();
+  }
 }
 

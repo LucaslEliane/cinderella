@@ -12,19 +12,12 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
-    ScreenFactor.instance;
-    return SafeArea(
-      top: false,
-      right: false,
-      bottom: false,
-      left: false,
-      child: new Container(
-        child: new Align(
-          alignment: Alignment.center,
-          widthFactor: 2,
-          heightFactor: 2,
-          child: new WelcomePage(),
-        ),
+    return Container(
+      child: new Align(
+        alignment: Alignment.center,
+        widthFactor: 2,
+        heightFactor: 2,
+        child: new WelcomePage(),
       ),
     );
   }

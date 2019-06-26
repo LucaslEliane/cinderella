@@ -19,7 +19,7 @@ enum SlideDirection {
 class PagerIndicatorViewModel {
   final List<PageViewModel> pages;
   final int activeIndex;
-  final int slidePercent;
+  final double slidePercent;
   final SlideDirection slideDirection;
 
   PagerIndicatorViewModel(
@@ -32,7 +32,7 @@ class PagerIndicatorViewModel {
 
 class PagerIndicatorBubbleViewModel {
   final Color color;
-  final int activePercent;
+  final double activePercent;
 
   PagerIndicatorBubbleViewModel(
     this.color,

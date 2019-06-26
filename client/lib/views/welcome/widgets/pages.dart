@@ -1,4 +1,6 @@
 import 'dart:async';
+
+import 'package:client/utils/screen_factor.dart';
 import 'package:flutter/material.dart';
 import 'package:client/view_models/welcome.dart';
 import 'package:client/views/welcome/widgets/pager_indicator.dart';
@@ -31,30 +33,39 @@ class PagesState extends State<Pages> {
   void onDrag(dynamic event) {
     SliderState state = event;
     if (mounted) {
-      print(state);
       setState(() {
-        slidePercent += 0.1;
+        slideDirection = state.direction;
+        if (slideDirection == SlideDirection.leftToRight) {
+          slidePercent += state.slidePercent;
+        }
+        if (slideDirection == SlideDirection.rightToLeft) {
+          slidePercent -= state.slidePercent;
+        }
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-        width: double.infinity,
-        color: viewModel.color,
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        child: Opacity(
-          opacity: 1.0,
-          child: ListView(
-            children: <Widget>[layout(context)],
+    final EdgeInsets devicePadding = ScreenFactor.instance.devicePadding;
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          color: viewModel.color,
+          padding: devicePadding,
+          child: Opacity(
+            opacity: 1.0,
+            child: ListView(
+              children: <Widget>[layout(context)],
+            )
           )
-        )
-      ),
-      new PagerIndicator(viewModel: new PagerIndicatorViewModel(pages, 0, SlideDirection.none, 10)),
-      new PagerDragger(sliderUpdater)
-    ]);
+        ),
+        new PagerIndicator(viewModel: new PagerIndicatorViewModel(pages, activeIndex, slideDirection, slidePercent)),
+        new PagerDragger(sliderUpdater, true, true)
+      ],
+      alignment: AlignmentDirectional.bottomCenter,
+    );
   }
 
   Column layout(BuildContext context) {
