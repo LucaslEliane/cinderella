@@ -39,5 +39,9 @@ class ScreenFactor {
   EdgeInsets get devicePadding {
     return _screenMediaQueryData.padding;
   }
+
+  Size get logicalSize {
+    return _screenMediaQueryData.size;
+  }
   
 }

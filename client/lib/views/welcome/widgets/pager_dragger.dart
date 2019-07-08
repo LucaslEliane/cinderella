@@ -44,7 +44,7 @@ class _PagerDraggerState extends State<PagerDragger> {
       }
 
       if (slideDirection != SlideDirection.none) {
-        slidePercent = (offsetX / ScreenFactor.instance.physicalSize.width).abs().clamp(0.0, 1.0);
+        slidePercent = (offsetX / ScreenFactor.instance.logicalSize.width).abs().clamp(0.0, 1.0);
       } else {
         slidePercent = 0.0;
       }
@@ -54,13 +54,23 @@ class _PagerDraggerState extends State<PagerDragger> {
       new SliderState(
         slideDirection,
         slidePercent,
-        SliderEventType.doneAnimating
+        SliderEventType.dragging
       )
     );
   }
 
   void onDragEnd(DragEndDetails endDetails) {
-    print(endDetails);
+    widget.sliderUpdater.add(
+      new SliderState(
+        slideDirection,
+        slidePercent,
+        SliderEventType.doneDragging
+      )
+    );
+
+    dragStartOffset = null;
+    slideDirection = SlideDirection.none;
+    slidePercent = 0.0;
   }
 
   @override

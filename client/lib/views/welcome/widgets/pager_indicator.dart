@@ -70,7 +70,6 @@ class PagerIndicatorBubble extends StatelessWidget {
   }
 
   int doublePercentToInt(double percent) {
-    print(percent);
     return (percent * 100).round();
   }
 }

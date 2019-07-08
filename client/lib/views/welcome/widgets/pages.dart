@@ -34,12 +34,17 @@ class PagesState extends State<Pages> {
     SliderState state = event;
     if (mounted) {
       setState(() {
-        slideDirection = state.direction;
-        if (slideDirection == SlideDirection.leftToRight) {
-          slidePercent += state.slidePercent;
-        }
-        if (slideDirection == SlideDirection.rightToLeft) {
-          slidePercent -= state.slidePercent;
+        final eventType = state.sliderEventType;
+
+        switch (eventType) {
+          case SliderEventType.dragging:
+            slideDirection = state.direction;
+            slidePercent = state.slidePercent;
+            break;
+          case SliderEventType.doneDragging:
+            if (slidePercent > 0.5) {
+
+            }
         }
       });
     }
@@ -75,7 +80,7 @@ class PagesState extends State<Pages> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Transform(
-          transform: Matrix4.translationValues(0.0, 10 * slidePercent, 0.0),
+          transform: Matrix4.translationValues(0.0, ScreenFactor.instance.logicalSize.height * slidePercent * 0.5, 0.0),
           child: Padding(
             padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
             child: Image.asset(viewModel.heroAssetPath,
